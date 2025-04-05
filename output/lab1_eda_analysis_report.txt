@@ -1,5 +1,5 @@
 ===== Amtrak EDA Report =====
-Generated on: 2025-04-04 23:12:51 
+Generated on: 2025-04-05 12:57:20 
 
 ## Step 1: Importing and Preprocessing Data ##
 
@@ -10,6 +10,8 @@ $ Date           <chr> "1/1/1991", "2/1/1991", "3/1/1991", "4/1/1991", "5/1/1991
 $ Ridership      <int> 1708917, 1620586, 1972715, 1811665, 1974964, 1862356, 1939860, 2013264, 1595657…
 $ PassengerMiles <int> 496403905, 469330349, 587673262, 509303884, 564829409, 600660491, 628913573, 65…
 $ RidersReported <int> 3095646, 2888374, 3239288, 3137456, 3187129, 3125954, 3226855, 3236603, 2995918…
+
+ Summary of the data: 
      Date             Ridership       PassengerMiles      RidersReported   
  Length:402         Min.   : 121140   Min.   : 36015903   Min.   : 121140  
  Class :character   1st Qu.:1812214   1st Qu.:440322416   1st Qu.:1977374  
@@ -18,7 +20,7 @@ $ RidersReported <int> 3095646, 2888374, 3239288, 3137456, 3187129, 3125954, 322
                     3rd Qu.:2541141   3rd Qu.:551010943   3rd Qu.:2776706  
                     Max.   :2980190   Max.   :673871218   Max.   :3505455  
 
-After converting to tsibble:
+Data Glimpse after converting to tsibble:
 Rows: 402
 Columns: 4
 $ Date           <date> 1991-01-01, 1991-02-01, 1991-03-01, 1991-04-01, 1991-05-01, 1991-06-01, 1991-0…
@@ -38,11 +40,11 @@ Missing values per column:
 
 Structure of Ridership Time Series:
  Time-Series [1:402] from 1991 to 2024: 1708917 1620586 1972715 1811665 1974964 1862356 1939860 2013264 1595657 1724924 ...
-Saved plot to: outputs/plots/amtrak_ridership_ts_base_clean.png 
+Saved plot to: outputs/plots/amtrak_ridership_ts_clean.png 
 
 Structure of Passenger Miles Time Series:
  Time-Series [1:402] from 1991 to 2024: 496403905 469330349 587673262 509303884 564829409 600660491 628913573 659096915 492585869 508901883 ...
-Saved plot to: outputs/plots/amtrak_passenger_miles_ts_base_clean.png 
+Saved plot to: outputs/plots/amtrak_passenger_miles_ts_clean.png 
 
 ===== Step 4: Filtering and Autocorrelation Check =====
 
