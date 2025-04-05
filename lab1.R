@@ -112,12 +112,25 @@ cat("\nTotal missing values in the dataset:", sum(is.na(Amtrak)), "\n")
 cat("\nMissing values per column:\n")
 print(colSums(is.na(Amtrak)))
 
-plot_missing <- gg_miss_var(Amtrak) +
-  labs(title = "Missing Data Summary - Amtrak Dataset")
+# Creating a dataframe for missing counts (even if zero)
+missing_df <- tibble(
+  variable = names(Amtrak),
+  missing_count = colSums(is.na(Amtrak))
+)
+
+plot_missing <- ggplot(missing_df, aes(x = reorder(variable, -missing_count), y = missing_count)) +
+  geom_bar(stat = "identity", fill = "gray") +
+  geom_text(aes(label = missing_count), vjust = -0.5, size = 3.5) +
+  labs(
+    title = "Missing Data Summary - Amtrak Dataset",
+    subtitle = "No missing values detected in any column",
+    x = "Variables",
+    y = "Count of Missing Values"
+  ) +
+  theme_minimal()
 
 print(plot_missing)
 save_plot(plot_missing, "amtrak_missing_data.png")
-
 
 # ================== Step 3: Time Series Plot ==================
 
@@ -156,7 +169,7 @@ save_base_plot(
   plot_expr = {
     plot(
       Amtrak_passmiles_ts,
-      col = "teal",
+      col = "orange",
       xlab = "Time",
       ylab = "Passenger Miles",
       main = "Monthly Amtrak Passenger Miles (1991–2024)",
@@ -238,7 +251,7 @@ save_base_plot(
       bty = "l",
       las = 1
     )
-    lines(model_trend$fitted.values, col = "black", lwd = 2)
+    lines(model_trend$fitted.values, col = "skyblue", lwd = 2)
   },
   filename = "trend_fit_passenger_miles_full.png"
 )
@@ -287,7 +300,7 @@ plot_line_trend <- ggplot(amtrak_miles_df, aes(x = Date, y = PassengerMiles)) +
   labs(title = "Passenger Miles with Polynomial Trend (Original Data)", x = "Date", y = "Passenger Miles")
 save_plot(plot_line_trend, "gg_poly_trend_passenger_miles_original.png")
 
-# Optional: Trend for Ridership
+# Trend for Ridership
 plot_ridership_trend <- ggplot(Amtrak, aes(x = Date, y = Ridership)) +
   geom_line(color = "steelblue") +
   stat_smooth(method = "lm", formula = y ~ x + I(x^2), color = "orange") +
