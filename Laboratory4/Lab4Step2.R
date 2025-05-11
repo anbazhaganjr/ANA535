@@ -1,3 +1,18 @@
+##############################################################
+# ANA 535 – Laboratory #4 Step 2
+# ------------------------------------------------------------
+# Original Script Author: Dr. Marvine Hamner (April 2025)
+#
+# Modifications by: Naresh Anbazhagan, Graduate Student – ANA 535
+# - Modularized the forecasting workflow with helper functions
+# - Enhanced plot exports with `save_plot()` utility
+# - Streamlined logging and diagnostics for reproducibility
+# - Adapted the code for macOS compatibility and automation
+# - Ensured consistent file output for APA-style report inclusion
+#
+# Environment: R 4.5.0 on macOS, RStudio
+##############################################################
+
 # ======================
 # Required Packages
 # ======================
@@ -809,18 +824,21 @@ save_plot("step2_usa_forecast_grid_fit.png", p_grid_forecast)
 log_section("Exercise 8E: Fitted vs Actuals for Best Fit")
 
 aug_df <- best_fit %>% augment()
+print(colnames(aug_df))
+summary(aug_df$GDP)
+summary(aug_df$.fitted)
 
 p_gdp_fitted_vs_actual <- ggplot(aug_df, aes(x = Year)) +
-  geom_line(aes(y = GDP, color = "Actual")) +
-  geom_line(aes(y = .fitted, color = "Fitted")) +
+  geom_line(aes(y = GDP, color = "Actual"), linewidth = 1.25) +
+  geom_line(aes(y = .fitted, color = "Fitted"), linewidth = 1.25, linetype = "dashed") +
   labs(
     title = "Fitted vs Actuals: ARIMA(1,1,0) on USA GDP",
-    y = "GDP", x = "Year", color = ""
+    subtitle = "Dashed line = model fit; solid line = observed values",
+    y = "GDP (Billions)", x = "Year", color = NULL
   ) +
   scale_color_manual(values = c("Actual" = "black", "Fitted" = "blue")) +
-  theme_minimal()
-
-save_plot("step2_usa_gdp_fitted_vs_actuals.png", p_gdp_fitted_vs_actual)
+  theme_minimal(base_size = 13)
+save_plot("step2_usa_gdp_fitted_vs_actuals.png", p_gdp_fitted_vs_actual, width = 1000, height = 600, res = 150)
 
 log_section("Exercise 8F: ETS Model and Forecast")
 

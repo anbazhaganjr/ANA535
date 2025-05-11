@@ -1,3 +1,18 @@
+##############################################################
+# ANA 535 – Laboratory #4 Step 1
+# ------------------------------------------------------------
+# Original Script Author: Dr. Marvine Hamner (April 2025)
+#
+# Modifications by: Naresh Anbazhagan, Graduate Student – ANA 535
+# - Added helper methods for plot saving (`save_plot()`)
+# - Integrated structured logging with sink()
+# - Replaced platform-incompatible packages (e.g., seasonal) 
+#   with macOS-compatible alternatives (e.g., STL)
+# - Reorganized sections for reproducibility and automation
+#
+# Environment: R 4.5.0 on macOS, RStudio
+##############################################################
+
 # ======================
 # Required Packages
 # ======================
@@ -426,5 +441,11 @@ google_fit <- google.tsb |>
         stepwise = ARIMA(value),
         search = ARIMA(value, stepwise = FALSE, approximation = FALSE))
 report(google_fit)
+
+cat("\n\n===== PLOT DIAGNOSTIC =====\n\n")
+plots_created <- list.files("output/plots/step1", pattern = "\\.png$")
+cat("Plots found in output/plots/step1/:\n")
+print(sort(plots_created))
+cat("\nTotal plots created:", length(plots_created), "\n")
 
 end_log()
