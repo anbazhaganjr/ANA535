@@ -1,0 +1,239 @@
+
+===== ANA535 Lab 4 Execution Started:  2025-05-11 10:40:06 EDT  =====
+
+
+
+=====  Step 1a: Simulated White Noise (AR(0))  =====
+
+ Time-Series [1:1000] from 1 to 101: -5.07 -1.26 -3.97 -1.57 -0.89 ...
+
+
+=====  ADF Test for AR(0)  =====
+
+
+	Augmented Dickey-Fuller Test
+
+data:  e.ts
+Dickey-Fuller = -10.097, Lag order = 9, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  KPSS Test for AR(0)  =====
+
+
+	KPSS Test for Level Stationarity
+
+data:  e.ts
+KPSS Level = 0.092182, Truncation lag parameter = 7, p-value = 0.1
+
+
+
+=====  Step 1b: Simulated AR(1) Process  =====
+
+
+
+=====  Structure of e2.ts  =====
+
+ Time-Series [1:1000, 1] from 1 to 101: 0 -1.0498 1.3736 -0.0707 0.8191 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : NULL
+  ..$ : chr "y"
+
+
+=====  ADF Test for AR(1)  =====
+
+
+	Augmented Dickey-Fuller Test
+
+data:  e2.ts
+Dickey-Fuller = -8.1472, Lag order = 9, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  KPSS Test for AR(1)  =====
+
+
+	KPSS Test for Level Stationarity
+
+data:  e2.ts
+KPSS Level = 0.43304, Truncation lag parameter = 7, p-value = 0.06292
+
+
+
+=====  Step 1d: Simulated MA(1) Process  =====
+
+
+
+=====  Structure of e3.ts  =====
+
+ Time-Series [1:1000] from 1 to 1000: 0.877 -1.93 -1.014 1.061 -0.107 ...
+
+
+=====  ADF Test for MA(1)  =====
+
+
+	Augmented Dickey-Fuller Test
+
+data:  e3.ts
+Dickey-Fuller = -9.6337, Lag order = 9, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  KPSS Test for MA(1)  =====
+
+
+	KPSS Test for Level Stationarity
+
+data:  e3.ts
+KPSS Level = 0.093034, Truncation lag parameter = 7, p-value = 0.1
+
+
+
+=====  Step 1d: Simulated AR(1) with arima.sim for comparison  =====
+
+
+
+=====  Step 1c: Simulated AR(1) with Drift  =====
+
+
+
+=====  Structure of e2wd.ts  =====
+
+ Time-Series [1:1000, 1] from 1 to 101: 0 10.3 16.3 19.4 20.7 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : NULL
+  ..$ : chr "y"
+
+
+=====  ADF Test for AR(1) with Drift  =====
+
+
+	Augmented Dickey-Fuller Test
+
+data:  e2wd.ts
+Dickey-Fuller = -8.7079, Lag order = 9, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  KPSS Test for AR(1) with Drift  =====
+
+
+	KPSS Test for Level Stationarity
+
+data:  e2wd.ts
+KPSS Level = 0.08563, Truncation lag parameter = 7, p-value = 0.1
+
+
+
+=====  Step 1e: Earthquake Magnitude Data (1933–1976)  =====
+
+
+
+=====  Structure of quakes.ts  =====
+
+ Time-Series [1:296] from 1 to 296: 6.3 5.4 6.5 6 5.7 4 3 5.5 2.7 6.7 ...
+NULL
+
+
+=====  Attempting STL Decomposition  =====
+
+
+
+=====  Step 1f: Google Stock Price Data (Last 5 Years)  =====
+
+
+
+=====  Structure of Google Stock Data  =====
+
+'data.frame':	1257 obs. of  6 variables:
+ $ Date  : Date, format: "2025-04-25" "2025-04-24" "2025-04-23" ...
+ $ Close : num  164 161 158 154 150 ...
+ $ Volume: int  35148050 30787480 18575740 15910330 16147780 19513410 16921500 15690780 18255930 22581990 ...
+ $ Open  : num  167 159 158 151 151 ...
+ $ High  : num  168 162 160 155 151 ...
+ $ Low   : num  163 158 156 151 148 ...
+
+
+=====  ADF Test for Google Closing Prices  =====
+
+
+	Augmented Dickey-Fuller Test
+
+data:  google.ts
+Dickey-Fuller = -1.8695, Lag order = 10, p-value = 0.6336
+alternative hypothesis: stationary
+
+
+
+=====  Step 1g: Auto ARIMA Modeling  =====
+
+
+
+=====  Auto ARIMA: Simulated AR(1) Data (e2.ts)  =====
+
+# A tibble: 2 × 8
+  .model   sigma2 log_lik   AIC  AICc   BIC ar_roots  ma_roots 
+  <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <list>    <list>   
+1 stepwise  0.977  -1406. 2821. 2821. 2846. <cpl [3]> <cpl [1]>
+2 search    0.977  -1406. 2821. 2821. 2846. <cpl [3]> <cpl [1]>
+
+
+=====  Auto ARIMA: Simulated MA(1) Data (e3.ts)  =====
+
+# A tibble: 3 × 8
+  .model   sigma2 log_lik   AIC  AICc   BIC ar_roots  ma_roots 
+  <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <list>    <list>   
+1 arima001  0.996  -1416. 2837. 2837. 2847. <cpl [0]> <cpl [1]>
+2 stepwise  0.996  -1416. 2838. 2838. 2853. <cpl [1]> <cpl [1]>
+3 search    0.996  -1416. 2838. 2838. 2853. <cpl [1]> <cpl [1]>
+
+
+=====  Auto ARIMA: Earthquake Data (quakes.ts)  =====
+
+# A tibble: 3 × 8
+  .model   sigma2 log_lik   AIC  AICc   BIC ar_roots   ma_roots  
+  <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <list>     <list>    
+1 arima100   1.35   -460.  928.  929.  943. <cpl [13]> <cpl [12]>
+2 stepwise   1.06   -425.  860.  860.  878. <cpl [13]> <cpl [13]>
+3 search     1.05   -425.  856.  856.  867. <cpl [1]>  <cpl [1]> 
+
+
+=====  Auto ARIMA: Google Stock Data (google.ts)  =====
+
+# A tibble: 4 × 8
+  .model   sigma2 log_lik   AIC  AICc   BIC ar_roots  ma_roots 
+  <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <list>    <list>   
+1 arima110   6.22  -2930. 5864. 5864. 5874. <cpl [1]> <cpl [0]>
+2 arima310   6.20  -2927. 5861. 5861. 5882. <cpl [3]> <cpl [0]>
+3 stepwise   6.19  -2925. 5861. 5861. 5892. <cpl [2]> <cpl [3]>
+4 search     6.18  -2923. 5861. 5861. 5896. <cpl [2]> <cpl [4]>
+
+
+===== PLOT DIAGNOSTIC =====
+
+Plots found in output/plots/step1/:
+ [1] "step1a_ar0_acf.png"                   "step1a_ar0_ts_plot.png"              
+ [3] "step1a_raw_plot.png"                  "step1b_ar1_acf.png"                  
+ [5] "step1b_ar1_pacf.png"                  "step1b_ar1_ts_plot.png"              
+ [7] "step1c_ar1_drift_acf.png"             "step1c_ar1_drift_decompose.png"      
+ [9] "step1c_ar1_drift_pacf.png"            "step1c_ar1_drift_ts.png"             
+[11] "step1c_ar1_vs_ar1_drift_acf_pacf.png" "step1d_ma1_acf.png"                  
+[13] "step1d_ma1_pacf.png"                  "step1d_ma1_ts_plot.png"              
+[15] "step1d_ma1_vs_ar1_comparison.png"     "step1e_quakes_acf.png"               
+[17] "step1e_quakes_decomp.png"             "step1e_quakes_pacf.png"              
+[19] "step1e_quakes_trend_linear.png"       "step1e_quakes_trend_quad.png"        
+[21] "step1e_quakes_ts.png"                 "step1f_google_acf.png"               
+[23] "step1f_google_pacf.png"               "step1f_google_ts_plot.png"           
+[25] "step1g_e2_autoplot.png"               "step1g_e2_diff_display.png"          
+[27] "step1g_e3_autoplot.png"               "step1g_e3_diff_display.png"          
+[29] "step1g_google_autoplot.png"           "step1g_google_diff_display.png"      
+[31] "step1g_quakes_autoplot.png"           "step1g_quakes_diff_display.png"      
+
+Total plots created: 32 
+
+===== ANA535 Lab 4 Execution Ended:  2025-05-11 10:42:21 EDT  =====
+
