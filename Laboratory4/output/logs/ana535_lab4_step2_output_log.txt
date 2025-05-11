@@ -1,0 +1,685 @@
+
+===== ANA535 Lab 4 Execution Started:  2025-05-11 10:27:53 EDT  =====
+
+
+
+=====  Step2: Load Amtrak Data and Initial ACF  =====
+
+
+
+=====  Step 2: Decompose and Detrend Amtrak Data  =====
+
+
+
+=====  Structure of Amtrak.comp.91.16  =====
+
+List of 6
+ $ x       : Time-Series [1:313] from 1991 to 2017: 496 469 588 509 565 ...
+ $ seasonal: Time-Series [1:313] from 1991 to 2017: -74.323 -100.178 -2.499 -0.782 12.924 ...
+ $ trend   : Time-Series [1:313] from 1991 to 2017: NA NA NA NA NA ...
+ $ random  : Time-Series [1:313] from 1991 to 2017: NA NA NA NA NA ...
+ $ figure  : num [1:12] -74.323 -100.178 -2.499 -0.782 12.924 ...
+ $ type    : chr "additive"
+ - attr(*, "class")= chr "decomposed.ts"
+NULL
+
+
+=====  Step 2: Centered 3-Month Moving Average  =====
+
+
+
+=====  Step 2: 3-Month MA Zoom-In (2001–2003)  =====
+
+ Time-Series [1:313] from 1991 to 2017: NA NA NA NA NA ...
+ Time-Series [1:37] from 2001 to 2004: -9.29 3.24 -12.17 -6.91 -15.03 ...
+
+
+=====  Step 2: 3-Month Trailing MA (2001–2003)  =====
+
+
+
+=====  Step 2: Augmented Dickey-Fuller Test (ADF)  =====
+
+
+	Augmented Dickey-Fuller Test
+
+data:  Amtrak.ts.91.16
+Dickey-Fuller = -4.3003, Lag order = 6, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  Step 2: Shmueli Example - Moving Averages on Ridership  =====
+
+quartz_off_screen 
+                4 
+
+
+=====  Step 2: Shmueli Zoom-In MA (2001–2003)  =====
+
+quartz_off_screen 
+                4 
+quartz_off_screen 
+                4 
+
+
+=====  Step 2: Cleanup and Reload Amtrak Dataset  =====
+
+
+
+=====  Step 2: Stationarity Checks - ADF and KPSS  =====
+
+
+	KPSS Test for Trend Stationarity
+
+data:  Amtrak.ts.91.16
+KPSS Trend = 0.66626, Truncation lag parameter = 5, p-value = 0.01
+
+
+	Augmented Dickey-Fuller Test
+
+data:  Amtrak.ts.91.16
+Dickey-Fuller = -4.3003, Lag order = 6, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  Step 2: Unit Root Differencing Checks  =====
+
+ndiffs 
+     1 
+# A tibble: 1 × 1
+  ndiffs
+   <int>
+1      1
+ndiffs 
+     1 
+
+	KPSS Test for Trend Stationarity
+
+data:  Amtrak_seasdiff_1
+KPSS Trend = 0.15775, Truncation lag parameter = 5, p-value = 0.04021
+
+
+	Augmented Dickey-Fuller Test
+
+data:  Amtrak_seasdiff_1
+Dickey-Fuller = -4.13, Lag order = 6, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  Step 2: Second Differencing  =====
+
+ndiffs 
+     0 
+
+	KPSS Test for Trend Stationarity
+
+data:  Amtrak_seasdiff_2
+KPSS Trend = 0.01267, Truncation lag parameter = 5, p-value = 0.1
+
+
+	Augmented Dickey-Fuller Test
+
+data:  Amtrak_seasdiff_2
+Dickey-Fuller = -9.6269, Lag order = 6, p-value = 0.01
+alternative hypothesis: stationary
+
+
+
+=====  Step 2: ARIMA Modeling on Twice-Differenced Data  =====
+
+
+--- forecast::auto.arima() Summary ---
+Series: Amtrak_2.ts 
+ARIMA(5,0,4) with zero mean 
+
+Coefficients:
+          ar1     ar2      ar3      ar4      ar5     ma1      ma2      ma3     ma4
+      -0.5808  0.0933  -0.0497  -0.8562  -0.4374  0.1714  -0.3560  -0.0236  0.7808
+s.e.   0.0723  0.0683   0.0739   0.0750   0.0622  0.0624   0.0783   0.0884  0.0675
+
+sigma^2 = 828.2:  log likelihood = -1430.1
+AIC=2880.21   AICc=2880.97   BIC=2917.25
+
+Training set error measures:
+                    ME     RMSE      MAE       MPE     MAPE      MASE       ACF1
+Training set 0.0425121 28.34363 20.30323 -126.3959 451.2516 0.5507905 -0.0335134
+
+--- fable::ARIMA() Model Report ---
+# A tibble: 3 × 8
+  .model   sigma2 log_lik   AIC  AICc   BIC ar_roots   ma_roots  
+  <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <list>     <list>    
+1 arima101   555.  -1378. 2769. 2769. 2795. <cpl [25]> <cpl [25]>
+2 stepwise   555.  -1378. 2769. 2769. 2795. <cpl [25]> <cpl [25]>
+3 search     550.  -1378. 2763. 2763. 2778. <cpl [1]>  <cpl [13]>
+
+
+=====  Step 2: Forecast with forecast::auto.arima Model  =====
+
+$mean
+Time Series:
+Start = 301 
+End = 360 
+Frequency = 1 
+ [1] -10.1301792   6.9702560  -6.5827893  -4.7476056   4.2184624  -4.1027208   5.5993916   3.0997882
+ [9]  -2.6094160   3.1940961  -5.2520759  -1.6251882   1.1736042  -2.1657156   4.5476741   0.7871154
+[17]  -0.2193204   1.3158258  -3.7701322  -0.3397434  -0.3762322  -0.6565638   3.0154831   0.1459936
+[25]   0.6998395   0.1840716  -2.3434948  -0.1004639  -0.8324488   0.1268091   1.7796289   0.1306335
+[33]   0.8405083  -0.3088346  -1.3278637  -0.1895935  -0.7751775   0.3952723   0.9795090   0.2496136
+[41]   0.6733831  -0.4158302  -0.7195992  -0.2964478  -0.5600140   0.3948329   0.5311583   0.3247179
+[49]   0.4504802  -0.3508289  -0.3978139  -0.3343988  -0.3531892   0.2970306   0.3052020   0.3283004
+[57]   0.2717000  -0.2421647  -0.2415427  -0.3103779
+
+$lower
+Time Series:
+Start = 301 
+End = 360 
+Frequency = 1 
+            95%
+ [1,] -66.53518
+ [2,] -53.97865
+ [3,] -67.54791
+ [4,] -65.95781
+ [5,] -56.99177
+ [6,] -65.54277
+ [7,] -57.56434
+ [8,] -60.17248
+ [9,] -66.18728
+[10,] -60.38388
+[11,] -69.51995
+[12,] -65.92101
+[13,] -63.37275
+[14,] -66.72560
+[15,] -60.35906
+[16,] -64.12735
+[17,] -65.33985
+[18,] -63.83788
+[19,] -69.08428
+[20,] -65.65403
+[21,] -65.83819
+[22,] -66.15919
+[23,] -62.55903
+[24,] -65.43073
+[25,] -64.97363
+[26,] -65.52711
+[27,] -68.08631
+[28,] -65.85094
+[29,] -66.64180
+[30,] -65.71205
+[31,] -64.07338
+[32,] -65.73483
+[33,] -65.05866
+[34,] -66.22847
+[35,] -67.25426
+[36,] -66.13092
+[37,] -66.73486
+[38,] -65.57731
+[39,] -64.99672
+[40,] -65.74168
+[41,] -65.32753
+[42,] -66.42422
+[43,] -66.73030
+[44,] -66.32073
+[45,] -66.58921
+[46,] -65.63839
+[47,] -65.50377
+[48,] -65.72147
+[49,] -65.59822
+[50,] -66.40154
+[51,] -66.44995
+[52,] -66.39531
+[53,] -66.41541
+[54,] -65.76613
+[55,] -65.75921
+[56,] -65.74264
+[57,] -65.79996
+[58,] -66.31423
+[59,] -66.31473
+[60,] -66.38825
+
+$upper
+Time Series:
+Start = 301 
+End = 360 
+Frequency = 1 
+           95%
+ [1,] 46.27482
+ [2,] 67.91916
+ [3,] 54.38233
+ [4,] 56.46260
+ [5,] 65.42870
+ [6,] 57.33733
+ [7,] 68.76312
+ [8,] 66.37206
+ [9,] 60.96845
+[10,] 66.77207
+[11,] 59.01580
+[12,] 62.67064
+[13,] 65.71996
+[14,] 62.39417
+[15,] 69.45441
+[16,] 65.70158
+[17,] 64.90121
+[18,] 66.46953
+[19,] 61.54402
+[20,] 64.97454
+[21,] 65.08572
+[22,] 64.84606
+[23,] 68.59000
+[24,] 65.72271
+[25,] 66.37331
+[26,] 65.89525
+[27,] 63.39932
+[28,] 65.65001
+[29,] 64.97690
+[30,] 65.96567
+[31,] 67.63264
+[32,] 65.99610
+[33,] 66.73968
+[34,] 65.61081
+[35,] 64.59853
+[36,] 65.75174
+[37,] 65.18451
+[38,] 66.36785
+[39,] 66.95573
+[40,] 66.24091
+[41,] 66.67430
+[42,] 65.59256
+[43,] 65.29110
+[44,] 65.72783
+[45,] 65.46919
+[46,] 66.42805
+[47,] 66.56609
+[48,] 66.37091
+[49,] 66.49918
+[50,] 65.69988
+[51,] 65.65432
+[52,] 65.72652
+[53,] 65.70903
+[54,] 66.36019
+[55,] 66.36961
+[56,] 66.39924
+[57,] 66.34336
+[58,] 65.82990
+[59,] 65.83165
+[60,] 65.76749
+
+
+
+=====  Step 2: Forecast with forecast::auto.arima on Original Series  =====
+
+
+--- Forecast::ARIMA for Passenger Miles ---
+Series: Amtrak.ts 
+ARIMA(0,1,3)(2,1,1)[12] 
+
+Coefficients:
+          ma1      ma2      ma3    sar1     sar2     sma1
+      -0.4497  -0.1443  -0.1026  0.0024  -0.0275  -0.8109
+s.e.   0.0579   0.0677   0.0558  0.0791   0.0746   0.0545
+
+sigma^2 = 556.6:  log likelihood = -1377.88
+AIC=2769.75   AICc=2770.13   BIC=2795.68
+
+Training set error measures:
+                    ME     RMSE      MAE          MPE    MAPE      MASE        ACF1
+Training set 0.6864339 22.86571 16.29686 -0.001933787 3.29874 0.6085877 0.005960154
+
+--- Forecast::ARIMA for Ridership ---
+Series: AmtrakR.ts 
+ARIMA(3,0,0)(2,1,2)[12] with drift 
+
+Coefficients:
+         ar1     ar2     ar3    sar1     sar2     sma1    sma2     drift
+      0.5592  0.1875  0.1456  0.9527  -0.2607  -1.6659  0.7691  2894.799
+s.e.  0.0580  0.0651  0.0579  0.1362   0.0821   0.1351  0.1198  1156.445
+
+sigma^2 = 6.315e+09:  log likelihood = -3826.94
+AIC=7671.87   AICc=7672.49   BIC=7705.24
+
+Training set error measures:
+                   ME     RMSE     MAE        MPE     MAPE      MASE         ACF1
+Training set 753.7987 76884.36 54352.6 -0.1232494 2.590713 0.5264228 -0.002375138
+$mean
+          Jan      Feb      Mar      Apr      May      Jun      Jul      Aug      Sep      Oct      Nov
+2017          423.7004 541.8471 536.3078 557.1402 600.3465 647.3808 612.8008 525.1529 539.1502 527.7562
+2018 461.9026 426.9440 543.7566 538.4367 557.5080 601.5156 648.6154 614.2388 526.1923 540.7006 528.9535
+2019 462.7914 428.2703 545.3814 539.0632 559.0296 603.0527 650.3713 615.3546 527.3771 541.3295 530.5968
+2020 463.9602 429.4666 546.6151 540.2885 560.3055 604.3065 651.6239 616.6001 528.6337 542.5707 531.8501
+2021 465.2208 430.7154 547.8557 541.5565 561.5490 605.5496 652.8610 617.8547 529.8864 543.8387 533.0903
+2022 466.4740                                                                                          
+          Dec
+2017 560.8339
+2018 562.1025
+2019 563.4196
+2020 564.6701
+2021 565.9193
+2022         
+
+$lower
+          Jan      Feb      Mar      Apr      May      Jun      Jul      Aug      Sep      Oct      Nov
+2017          377.4588 489.0664 480.2876 499.3899 540.9164 586.3171 550.1461 460.9467 473.4290 460.5541
+2018 391.8327 353.2316 467.6591 460.3248 477.6275 519.9047 565.3100 529.2728 439.5975 452.5070 439.1897
+2019 369.9667 332.3397 447.2129 438.9258 457.1074 499.3763 544.9700 508.2562 418.6079 430.9149 418.5610
+2020 348.7502 311.0176 425.8224 417.4274 435.5643 477.7132 523.2052 486.3815 396.6398 408.8251 396.3754
+2021 326.3524 288.6148 403.3445 394.8901 412.9040 454.9519 500.3356 463.4258 373.5771 385.6713 373.0865
+2022 302.8590                                                                                          
+          Dec
+2017 492.1829
+2018 470.7955
+2019 449.7856
+2020 427.4881
+2021 404.0998
+2022         
+
+$upper
+          Jan      Feb      Mar      Apr      May      Jun      Jul      Aug      Sep      Oct      Nov
+2017          469.9420 594.6279 592.3280 614.8906 659.7766 708.4445 675.4555 589.3592 604.8715 594.9583
+2018 531.9726 500.6563 619.8541 616.5486 637.3886 683.1265 731.9208 699.2048 612.7872 628.8941 618.7173
+2019 555.6162 524.2008 643.5498 639.2005 660.9519 706.7290 755.7726 722.4531 636.1462 651.7440 642.6326
+2020 579.1701 547.9156 667.4077 663.1496 685.0466 730.8998 780.0426 746.8187 660.6275 676.3163 667.3249
+2021 604.0892 572.8159 692.3670 688.2230 710.1941 756.1473 805.3863 772.2836 686.1957 702.0060 693.0941
+2022 630.0890                                                                                          
+          Dec
+2017 629.4849
+2018 653.4096
+2019 677.0535
+2020 701.8522
+2021 727.7387
+2022         
+
+$mean
+         Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sep     Oct     Nov     Dec
+2017         2257389 2790078 2744834 2828494 2872902 3018368 2914858 2712571 2780554 2776362 2753028
+2018 2424996 2312448 2861015 2848350 2887681 2943287 3085709 2997635 2796434 2867975 2826879 2814490
+2019 2476884 2357548 2916045 2897560 2922671 2985318 3130562 3040731 2847911 2914956 2865414 2859180
+2020 2508791 2393759 2957794 2925474 2948786 3015396 3164286 3068908 2883929 2945895 2898051 2894939
+2021 2534974 2425909 2992722 2948824 2974206 3042830 3194526 3094384 2914749 2973103 2929129 2927433
+2022 2561721                                                                                        
+
+$lower
+         Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sep     Oct     Nov     Dec
+2017         2101628 2611616 2550104 2616974 2648983 2784374 2672325 2462939 2524956 2515712 2488092
+2018 2156414 2030524 2572114 2553726 2587664 2638850 2777519 2686214 2482255 2551433 2508309 2494179
+2019 2155077 2032345 2588757 2568518 2592007 2653294 2797370 2706528 2512838 2579134 2528946 2522154
+2020 2171285 2054080 2616991 2583735 2606140 2672000 2820246 2724307 2538846 2600396 2552192 2548770
+2021 2188538 2076611 2642168 2597237 2621576 2689347 2840313 2739535 2559353 2617235 2572853 2570806
+2022 2204791                                                                                        
+
+$upper
+         Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sep     Oct     Nov     Dec
+2017         2413151 2968540 2939565 3040014 3096821 3252363 3157390 2962202 3036151 3037013 3017964
+2018 2693579 2594372 3149917 3142974 3187698 3247725 3393898 3309056 3110613 3184516 3145448 3134802
+2019 2798692 2682751 3243332 3226601 3253335 3317343 3463754 3374935 3182984 3250778 3201883 3196206
+2020 2846298 2733439 3298597 3267213 3291431 3358792 3508326 3413509 3229012 3291394 3243909 3241107
+2021 2881410 2775208 3343277 3300411 3326837 3396312 3548738 3449233 3270146 3328972 3285404 3284061
+2022 2918652                                                                                        
+
+$mean
+          Jan      Feb      Mar      Apr      May      Jun      Jul      Aug      Sep      Oct      Nov
+2017          467.5742 492.4867 496.9135 488.0833 485.6503 488.0502 489.2836 488.6662 488.1655 488.2893
+2018 488.4636 488.4001 488.3940 488.4141 488.4193 488.4134 488.4108 488.4123 488.4134 488.4131 488.4127
+2019 488.4128 488.4129 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128
+2020 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128
+2021 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128 488.4128
+2022 488.4128                                                                                          
+          Dec
+2017 488.4755
+2018 488.4127
+2019 488.4128
+2020 488.4128
+2021 488.4128
+2022         
+
+$lower
+             Jan         Feb         Mar         Apr         May         Jun         Jul         Aug
+2017             357.7751300 350.4015551 341.4426482 321.0127086 304.0253433 292.3040489 281.3649162
+2018 228.4466756 219.1393778 210.1792651 201.5246922 193.1152947 184.9289012 176.9589417 169.1914377
+2019 132.8866709 126.0618600 119.3631814 112.7839681 106.3180471  99.9597335  93.7038235  87.5455312
+2020  58.0739660  52.4186474  46.8357510  41.3225637  35.8765379  30.4952772  25.1765246  19.9181512
+2021  -5.5347496 -10.4695217 -15.3559565 -20.1954473 -24.9893215 -29.7388453 -34.4452273 -39.1096221
+2022 -61.8388258                                                                                    
+             Sep         Oct         Nov         Dec
+2017 269.5966292 258.2417755 247.8601835 238.0341557
+2018 161.6085841 154.1965584 146.9451774 139.8449775
+2019  81.4804274  75.5044030  69.6136435  63.8046008
+2020  14.7181461   9.5746078   4.4857358  -0.5501767
+2021 -43.7331339 -48.3168192 -52.8616898 -57.3687154
+2022                                                
+
+$upper
+           Jan       Feb       Mar       Apr       May       Jun       Jul       Aug       Sep       Oct
+2017            577.3732  634.5718  652.3844  655.1538  667.2753  683.7964  697.2022  707.7358  718.0892
+2018  748.4805  757.6607  766.6087  775.3034  783.7232  791.8979  799.8626  807.6331  815.2182  822.6296
+2019  843.9390  850.7638  857.4624  864.0416  870.5076  876.8659  883.1218  889.2801  895.3452  901.3212
+2020  918.7517  924.4070  929.9899  935.5031  940.9491  946.3303  951.6491  956.9075  962.1075  967.2510
+2021  982.3604  987.2951  992.1816  997.0211 1001.8149 1006.5645 1011.2708 1015.9352 1020.5588 1025.1424
+2022 1038.6644                                                                                          
+           Nov       Dec
+2017  728.7185  738.9168
+2018  829.8801  836.9804
+2019  907.2120  913.0210
+2020  972.3399  977.3758
+2021 1029.6873 1034.1943
+2022                    
+
+
+
+=====  Step 2: Forecast with fable::ARIMA on Original Series  =====
+
+
+--- fable::ARIMA Models on Original Data ---
+# A tibble: 4 × 8
+  .model   sigma2 log_lik   AIC  AICc   BIC ar_roots   ma_roots  
+  <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <list>     <list>    
+1 arima013   557.  -1378. 2770. 2770. 2796. <cpl [24]> <cpl [15]>
+2 arima101   573.  -1386. 2786. 2787. 2812. <cpl [25]> <cpl [25]>
+3 stepwise   555.  -1378. 2769. 2769. 2795. <cpl [25]> <cpl [25]>
+4 search     550.  -1378. 2763. 2763. 2778. <cpl [1]>  <cpl [13]>
+
+
+=====  Step 2: Forecast Comparison - All Models  =====
+
+
+
+=====  Exercise 3A: Turkey GDP Analysis  =====
+
+
+--- Guerrero Lambda for Turkey GDP ---
+# A tibble: 1 × 2
+  Country lambda_guerrero
+  <fct>             <dbl>
+1 Turkey            0.157
+
+--- Estimated Box-Cox Lambda for Turkey GDP ---
+[1] 0.1571804
+
+
+=====  Exercise 3B: Tasmania Accommodation Takings  =====
+
+
+--- Estimated Box-Cox Lambda for Tasmania Takings ---
+[1] -0.005076712
+
+--- Number of Differences Required for Stationarity (Tasmania): ---
+[1] 1
+
+
+=====  Exercise 3B: Tasmania - Alternative Visualization  =====
+
+
+--- Guerrero Lambda via Alternative Path (Tasmania) ---
+# A tibble: 1 × 2
+  State    lambda_guerrero
+  <chr>              <dbl>
+1 Tasmania         0.00182
+
+
+=====  Exercise 3C: Souvenir Sales  =====
+
+
+--- Estimated Box-Cox Lambda for Souvenir Sales ---
+[1] -0.2444328
+
+--- Number of Differences Required for Souvenirs ---
+[1] 1
+
+
+=====  Exercise 3C: Souvenirs - Alternative Visualizations  =====
+
+
+--- Guerrero Lambda via Alternative Path (Souvenirs) ---
+# A tibble: 1 × 1
+  lambda_guerrero
+            <dbl>
+1         0.00212
+
+
+=====  Exercise 8A: United States GDP Analysis  =====
+
+
+--- Estimated Box-Cox Lambda (USA GDP) ---
+[1] 0.2819443
+
+
+=====  Exercise 8: USA GDP First Difference Check  =====
+
+
+
+=====  Exercise 8B: ARIMA Model Fitting on USA GDP  =====
+
+Series: GDP 
+Model: ARIMA(1,1,0) w/ drift 
+
+Coefficients:
+         ar1  constant
+      0.4586  118.1822
+s.e.  0.1198    9.5047
+
+sigma^2 estimated as 5479:  log likelihood=-325.32
+AIC=656.65   AICc=657.1   BIC=662.78
+# A tibble: 16 × 2
+   .model    AICc
+   <chr>    <dbl>
+ 1 arima110  657.
+ 2 arima011  659.
+ 3 arima111  659.
+ 4 arima210  659.
+ 5 arima012  660.
+ 6 arima112  661.
+ 7 arima211  661.
+ 8 arima310  662.
+ 9 arima013  662.
+10 arima312  663.
+11 arima311  664.
+12 arima113  664.
+13 arima212  664.
+14 arima313  665.
+15 arima213  666.
+16 arima010  668.
+
+
+=====  Exercise 8D: Best Fit and Residuals  =====
+
+Series: GDP 
+Model: ARIMA(1,1,0) w/ drift 
+Transformation: box_cox(GDP, lambda_usa) 
+
+Coefficients:
+         ar1  constant
+      0.5810    0.1031
+s.e.  0.1078    0.0105
+
+sigma^2 estimated as 0.006866:  log likelihood=62.02
+AIC=-118.03   AICc=-117.58   BIC=-111.9
+
+
+=====  Exercise 8E: Forecast Plots (ARIMA vs Grid Fit)  =====
+
+
+
+=====  Exercise 8E: Fitted vs Actuals for Best Fit  =====
+
+[1] ".model"  "Year"    "GDP"     ".fitted" ".resid"  ".innov" 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   7215    9756   13827   13519   17014   19775 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   7192    9765   13784   13522   17007   19764 
+
+
+=====  Exercise 8F: ETS Model and Forecast  =====
+
+ETS(M,A,N) 
+
+Call:
+ets(y = usa_gdp$GDP)
+
+  Smoothing parameters:
+    alpha = 0.9999 
+    beta  = 0.3731 
+
+  Initial states:
+    l = 7045.3979 
+    b = 198.9275 
+
+  sigma:  0.0059
+
+     AIC     AICc      BIC 
+744.1762 745.3300 754.4784 
+
+
+=====  Step 2: Cross-Validation with Train/Test Split  =====
+
+
+
+=====  Forecast Accuracy (Train vs Test)  =====
+
+# A tibble: 2 × 9
+  .type       ME  RMSE   MAE    MPE  MAPE  MASE RMSSE  ACF1
+  <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
+1 Training -1.78  32.4  24.9 -0.594  5.37  1     1    0.638
+2 Test     33.8   53.3  42.4  6.00   7.66  1.70  1.65 0.583
+
+
+=====  Step 2: Hyndman-style Time Series Cross-Validation  =====
+
+NULL
+
+
+===== PLOT DIAGNOSTIC =====
+
+Plots found in output/plots/step2/:
+ [1] "step2_acf_detrended.png"                  "step2_acf_initial.png"                   
+ [3] "step2_amtrak_diff2_ts_plot.png"           "step2_centered_3ma.png"                  
+ [5] "step2_centered_ma_zoom.png"               "step2_decomp_detrended.png"              
+ [7] "step2_decomp_repeat.png"                  "step2_decomp_seasdiff1.png"              
+ [9] "step2_decomp_seasdiff2.png"               "step2_decomp.png"                        
+[11] "step2_diff2_pacf.png"                     "step2_forecast_all_models_comparison.png"
+[13] "step2_forecast_fable_arima013.png"        "step2_forecast_model1.png"               
+[15] "step2_forecast_model2.png"                "step2_forecast_model3.png"               
+[17] "step2_forecast_model4.png"                "step2_pacf_detrended.png"                
+[19] "step2_pacf_original.png"                  "step2_shmueli_ma_plot.png"               
+[21] "step2_shmueli_ma_zoom_12.png"             "step2_shmueli_ma_zoom_3.png"             
+[23] "step2_snaive_forecast_vs_actual.png"      "step2_snaive_residuals.png"              
+[25] "step2_souvenir_alt_log_diff.png"          "step2_souvenir_alt_log_diff2.png"        
+[27] "step2_souvenir_alt_log.png"               "step2_souvenir_alt_raw.png"              
+[29] "step2_souvenir_diff_check.png"            "step2_souvenir_tsdisplay_raw.png"        
+[31] "step2_souvenir_tsdisplay_transformed.png" "step2_tasmania_alt_raw.png"              
+[33] "step2_tasmania_diff_check.png"            "step2_tasmania_log_diff.png"             
+[35] "step2_tasmania_log_diff2.png"             "step2_tasmania_log.png"                  
+[37] "step2_tasmania_tsdisplay_raw.png"         "step2_tasmania_tsdisplay_transformed.png"
+[39] "step2_trailing_ma.png"                    "step2_train_test_overlay.png"            
+[41] "step2_tscv_input_plot.png"                "step2_tscv_mae_comparison.png"           
+[43] "step2_turkey_gdp.png"                     "step2_turkey_log_diff.png"               
+[45] "step2_turkey_log_gdp.png"                 "step2_turkey_tsdisplay.png"              
+[47] "step2_usa_bestfit_residuals.png"          "step2_usa_diff_check.png"                
+[49] "step2_usa_forecast_ets.png"               "step2_usa_forecast_grid_fit.png"         
+[51] "step2_usa_gdp_fitted_vs_actuals.png"      "step2_usa_gdp_raw.png"                   
+[53] "step2_usa_gdp_transformed.png"           
+
+Total plots created: 53 
+
+===== ANA535 Lab 4 Execution Ended:  2025-05-11 10:33:00 EDT  =====
+
