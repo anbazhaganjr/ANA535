@@ -1,0 +1,14 @@
+Series_Name,Short_Sector,Group
+IP.B50001.S,Total Index,Total
+IP.G2211A2.S,Electric and Gas Utilities,Utilities
+IP.G2211.S,Electric Power,Utilities
+IP.G2212.S,Natural Gas,Utilities
+IP.B50030.S,Final Products,Products
+IP.B51000.S,Consumer Goods,Consumer Goods
+IP.B51100.S,Durable Consumer Goods,Consumer Goods
+IP.B51110.S,Automotive Products,Consumer Goods
+IP.B53000.S,Manufacturing Total,Manufacturing
+IP.B53100.S,Durable Manufacturing,Manufacturing
+IP.B53200.S,Nondurable Manufacturing,Manufacturing
+IP.G21.S,Mining,Mining
+IP.B52000.S,Business Equipment,Equipment

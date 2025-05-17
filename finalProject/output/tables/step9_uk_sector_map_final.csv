@@ -1,0 +1,23 @@
+Code,Short_Sector,Group
+IOP..C.MANUFACTURING..CVMSA,Manufacturing Total,Manufacturing
+IOP..21.Manuf.Of.Basic.Pharmaceutical.Prods...Pharmaceutical.Preparation.CVMNSA,Pharmaceuticals,Manufacturing
+IOP..35.Electricity.Gas.Steam.And.Air.Conditioning.Supply..CVMSA,Electric and Gas Utilities,Utilities
+IOP..B.MINING.AND.QUARRYING..CVMSA,Mining,Mining
+MIG.COG.Main.Industrial.Groupings...Consumer.Goods..CVM..momy.gr...664,MIG Consumer Goods Growth,Consumer Goods Growth
+MIG.CND.Main.Industrial.Groupings..Consumer.Non.Durables.CVM.momy.gr...666,MIG Consumer Non-Durables Growth,Consumer Goods Growth
+CC.Manufacture.of.Wood...Paper.Products.and.Printing..CVM..momy.gr...602,Wood and Paper Products Growth,Manufacturing Growth
+B.MINING.AND.QUARRYING..CVM..momy.gr...583,Mining Growth,Mining Growth
+MIG.COG.Main.Industrial.Groupings...Consumer.Goods.CVM.3mo3my.gr...842,MIG Consumer Goods 3mo3my Growth,Consumer Goods 3mo3my Growth
+MIG.CND.Main.Industrial.Groupings..Consumer.Non.Durables.CVM.3mo3my.gr...844,MIG Consumer Non-Durables 3mo3my Growth,Consumer Goods 3mo3my Growth
+CC.Manufacture.of.Wood...Paper.Products.and.Printing..CVM.3mo3my.gr...780,Wood and Paper Products 3mo3my Growth,Manufacturing 3mo3my Growth
+B.MINING.AND.QUARRYING..CVM.3mo3my.gr...761,Mining 3mo3my Growth,Mining 3mo3my Growth
+MIG.COG.Main.Industrial.Groupings...Consumer.Goods..CVM.3mo3m.gr...931,MIG Consumer Goods 3mo3m Growth,Consumer Goods 3mo3m Growth
+MIG.CND.Main.Industrial.Groupings..Consumer.Non.Durables.CVM.3mo3m.gr...933,MIG Consumer Non-Durables 3mo3m Growth,Consumer Goods 3mo3m Growth
+CC.Manufacture.of.Wood...Paper.Products.and.Printing..CVM.3mo3m.gr...958,Wood and Paper Products 3mo3m Growth,Manufacturing 3mo3m Growth
+B.MINING.AND.QUARRYING..CVM.3mo3m.gr...939,Mining 3mo3m Growth,Mining 3mo3m Growth
+CE.Manufacture.of.Chemicals.and.Chemical.Products..CVM..momy.gr...608,Chemicals Growth,Chemicals Growth
+CE.Manufacture.of.Chemicals.and.Chemical.Products.CVM.3mo3my.gr...786,Chemicals 3mo3my Growth,Chemicals 3mo3my Growth
+CE.Manufacture.of.Chemicals.and.Chemical.Products.CVM.3mo3m.gr...964,Chemicals 3mo3m Growth,Chemicals 3mo3m Growth
+EAI.Engineering.and.Allied.Industries..CVM..momy.gr...660,Engineering and Allied Industries Growth,Aggregate Growth
+EAI.Engineering.and.Allied.Industries.CVM.3mo3my.gr...838,Engineering and Allied Industries 3mo3my Growth,Aggregate 3mo3my Growth
+EAI.Engineering.and.Allied.Industries.CVM.3mo3m.gr...1016,Engineering and Allied Industries 3mo3m Growth,Aggregate 3mo3m Growth

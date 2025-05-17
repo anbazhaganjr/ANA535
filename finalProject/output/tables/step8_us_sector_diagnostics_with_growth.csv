@@ -1,0 +1,49 @@
+Short_Sector,Group,ValidRows,MinDate,MaxDate,SD,MissingValues
+Automotive Products,Consumer Goods,928,1948-01-01,2025-04-01,30.36485515612193,0
+Automotive Products 3mo3m Growth,Consumer Goods 3mo3m Growth,923,1948-06-01,2025-04-01,9.11346318930149,0
+Automotive Products 3mo3my Growth,Consumer Goods 3mo3my Growth,911,1949-06-01,2025-04-01,15.71927618259701,0
+Automotive Products Growth,Consumer Goods Growth,927,1948-02-01,2025-04-01,7.135769861357339,0
+Consumer Goods,Consumer Goods,928,1948-01-01,2025-04-01,28.75255916864134,0
+Consumer Goods 3mo3m Growth,Consumer Goods 3mo3m Growth,923,1948-06-01,2025-04-01,1.7215318522054575,0
+Consumer Goods 3mo3my Growth,Consumer Goods 3mo3my Growth,911,1949-06-01,2025-04-01,4.866621172196345,0
+Consumer Goods Growth,Consumer Goods Growth,927,1948-02-01,2025-04-01,1.0930703417784688,0
+Durable Consumer Goods,Consumer Goods,928,1948-01-01,2025-04-01,31.982894871875118,0
+Durable Consumer Goods 3mo3m Growth,Consumer Goods 3mo3m Growth,923,1948-06-01,2025-04-01,5.000989762686711,0
+Durable Consumer Goods 3mo3my Growth,Consumer Goods 3mo3my Growth,911,1949-06-01,2025-04-01,11.66750865968328,0
+Durable Consumer Goods Growth,Consumer Goods Growth,927,1948-02-01,2025-04-01,3.3473770039828254,0
+Durable Manufacturing,Manufacturing,928,1948-01-01,2025-04-01,33.920241134972265,0
+Durable Manufacturing 3mo3m Growth,Manufacturing 3mo3m Growth,923,1948-06-01,2025-04-01,4.37167432621939,0
+Durable Manufacturing 3mo3my Growth,Manufacturing 3mo3my Growth,911,1949-06-01,2025-04-01,11.484919944620605,0
+Durable Manufacturing Growth,Manufacturing Growth,927,1948-02-01,2025-04-01,2.5339193919750285,0
+Electric Power,Utilities,640,1972-01-01,2025-04-01,22.111740390963945,0
+Electric Power 3mo3m Growth,Utilities 3mo3m Growth,635,1972-06-01,2025-04-01,1.945482231427806,0
+Electric Power 3mo3my Growth,Utilities 3mo3my Growth,623,1973-06-01,2025-04-01,3.5595265222247,0
+Electric Power Growth,Utilities Growth,639,1972-02-01,2025-04-01,1.969145375414976,0
+Electric and Gas Utilities,Utilities,928,1948-01-01,2025-04-01,32.70232399886976,0
+Electric and Gas Utilities 3mo3m Growth,Utilities 3mo3m Growth,923,1948-06-01,2025-04-01,1.9383282254283836,0
+Electric and Gas Utilities 3mo3my Growth,Utilities 3mo3my Growth,911,1949-06-01,2025-04-01,4.988793575200671,0
+Electric and Gas Utilities Growth,Utilities Growth,927,1948-02-01,2025-04-01,1.9016563654160423,0
+Final Products,Products,928,1948-01-01,2025-04-01,31.228932360764695,0
+Final Products 3mo3m Growth,Products 3mo3m Growth,923,1948-06-01,2025-04-01,1.741618240655756,0
+Final Products 3mo3my Growth,Products 3mo3my Growth,911,1949-06-01,2025-04-01,5.571536088804933,0
+Final Products Growth,Products Growth,927,1948-02-01,2025-04-01,0.9697630720634217,0
+Manufacturing Total,Manufacturing,928,1948-01-01,2025-04-01,30.18042326558917,0
+Manufacturing Total 3mo3m Growth,Manufacturing 3mo3m Growth,923,1948-06-01,2025-04-01,2.8289869750409515,0
+Manufacturing Total 3mo3my Growth,Manufacturing 3mo3my Growth,911,1949-06-01,2025-04-01,7.840617150349748,0
+Manufacturing Total Growth,Manufacturing Growth,927,1948-02-01,2025-04-01,1.5649922435878652,0
+Mining,Mining,928,1948-01-01,2025-04-01,16.38057438066481,0
+Mining 3mo3m Growth,Mining 3mo3m Growth,923,1948-06-01,2025-04-01,2.848660515852223,0
+Mining 3mo3my Growth,Mining 3mo3my Growth,911,1949-06-01,2025-04-01,7.051099953059937,0
+Mining Growth,Mining Growth,927,1948-02-01,2025-04-01,2.346991873453686,0
+Natural Gas,Utilities,640,1972-01-01,2025-04-01,10.17026452421997,0
+Natural Gas 3mo3m Growth,Utilities 3mo3m Growth,635,1972-06-01,2025-04-01,4.5448641530297405,0
+Natural Gas 3mo3my Growth,Utilities 3mo3my Growth,623,1973-06-01,2025-04-01,6.723889464435658,0
+Natural Gas Growth,Utilities Growth,639,1972-02-01,2025-04-01,5.785426513886293,0
+Nondurable Manufacturing,Manufacturing,856,1954-01-01,2025-04-01,26.70675201414245,0
+Nondurable Manufacturing 3mo3m Growth,Manufacturing 3mo3m Growth,851,1954-06-01,2025-04-01,1.9921817941574886,0
+Nondurable Manufacturing 3mo3my Growth,Manufacturing 3mo3my Growth,839,1955-06-01,2025-04-01,6.224985903381303,0
+Nondurable Manufacturing Growth,Manufacturing Growth,855,1954-02-01,2025-04-01,1.1829801729469542,0
+Total Index,Total,928,1948-01-01,2025-04-01,30.3860657868647,0
+Total Index 3mo3m Growth,Total 3mo3m Growth,923,1948-06-01,2025-04-01,2.060091406699304,0
+Total Index 3mo3my Growth,Total 3mo3my Growth,911,1949-06-01,2025-04-01,6.329804345341129,0
+Total Index Growth,Total Growth,927,1948-02-01,2025-04-01,1.0741382594713809,0
